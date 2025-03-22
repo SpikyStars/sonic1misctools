@@ -7,6 +7,8 @@ COLOR_SQUARES_PER_LINE = 16
 # In pixels.
 COLOR_SQUARE_SIZE = 1
 
+COLOR_RAMP_TYPE = "SonLVL"
+
 # Color ramp used by SonLVL.
 SONLVL_COLOR_RAMP = [0x00, 0x24, 0x49, 0x6D, 0x92, 0xB6, 0xDB, 0xFF]
 
@@ -24,10 +26,13 @@ def open_file():
         generate_output_img(colors_array)
 
 def convert_channel(channel):
-    return SONLVL_COLOR_RAMP[channel // 2]
-    # Code for Kega Fusion color ramping goes here. Eventually...
-    # if ():
-    #   return channel << 4
+    if COLOR_RAMP_TYPE == "SonLVL":
+        return SONLVL_COLOR_RAMP[channel // 2]
+    elif COLOR_RAMP_TYPE == "KegaFusion":
+        return channel << 4
+    elif COLOR_RAMP_TYPE == "EXTEND":
+        # 0x0A -> 0xAA
+        return (channel << 4) | channel
 
 
 def bytes_to_rgba(color_bytes):
