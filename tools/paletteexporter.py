@@ -30,7 +30,7 @@ def convert_channel(channel):
         return SONLVL_COLOR_RAMP[channel // 2]
     elif COLOR_RAMP_TYPE == "KegaFusion":
         return channel << 4
-    elif COLOR_RAMP_TYPE == "EXTEND":
+    elif COLOR_RAMP_TYPE == "GenPlusGX":
         # 0x0A -> 0xAA
         return (channel << 4) | channel
 
